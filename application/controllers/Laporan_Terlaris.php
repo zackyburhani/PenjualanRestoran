@@ -36,25 +36,23 @@ class Laporan_Terlaris extends CI_Controller
             ];
         }
 
-        $data =[
-            'title' => 'Laporan Terlaris',
-            'terlaris' => $parsing
-        ];
-        $this->load->view('template/v_header',$data);
-		$this->load->view('template/v_sidebar');
-		$this->load->view('v_lapTerlaris');
-		$this->load->view('template/v_footer');
+        if($parsing){
+            echo json_encode($parsing);
+        } else {
+            echo json_encode('gagal');
+        }
 
     }
 
 	public function cetak()
     {
-        $awal = $this->input->post('awal');
-        $akhir = $this->input->post('akhir');
+        $awal = $this->input->post('awal_chart');
+        $akhir = $this->input->post('akhir_chart');
+        $jumlah = $this->input->post('jumlah_chart');
 
         if($akhir < $awal){
             $this->session->set_flashdata('pesanGagal','Tanggal Tidak Valid');
-            redirect('laporan_penjualan');
+            redirect('Laporan_Terlaris');
         }
 
         $pdf = new FPDF('P','mm','A4');
@@ -82,15 +80,15 @@ class Laporan_Terlaris extends CI_Controller
         $pdf->ln(6);        
         $pdf->SetFont('Arial','B',10);
         $pdf->Cell(10,1,'',0,1);
-        $pdf->Cell(190,10,'LAPORAN PENDAPATAN TANGGAL '.shortdate_indo($awal). ' SAMPAI '.shortdate_indo($akhir),0,1,'C');
+        $pdf->Cell(190,10,'LAPORAN MENU TERLARIS TANGGAL '.shortdate_indo($awal). ' SAMPAI '.shortdate_indo($akhir),0,1,'C');
         
         $pdf->Cell(10,-1,'',0,1);
 
-        $pendapatan = $this->Model->lapPendapatan($awal,$akhir);
+        $terlaris = $this->Model->lapTerlaris($awal,$akhir,$jumlah);
 
-        if($pendapatan == null) {
+        if($terlaris == null) {
             $this->session->set_flashdata('pesanGagal','Data Tidak Ditemukan');
-            redirect('laporan_penjualan');
+            redirect('Laporan_Terlaris');
         }
 
         $pdf->Cell(190,5,' ',0,1,'C');
@@ -98,23 +96,23 @@ class Laporan_Terlaris extends CI_Controller
         $pdf->Cell(10,1,'',0,1);
         $pdf->SetFont('Arial','B',8);
         $pdf->Cell(10,6,'No.',1,0,'C');
-        $pdf->Cell(20,6,'Nomor Nota',1,0,'C');
-        $pdf->Cell(40,6,'Kategori',1,0,'C');
+        $pdf->Cell(20,6,'kategori',1,0,'C');
         $pdf->Cell(40,6,'Menu',1,0,'C');
-        $pdf->Cell(20,6,'Harga',1,0,'C');
+        $pdf->Cell(40,6,'Harga',1,0,'C');
+        $pdf->Cell(20,6,'Total',1,0,'C');
         $pdf->Cell(15,6,'Jumlah',1,0,'C');
         $pdf->Cell(45,6,'Jumlah Bayar',1,1,'C');
         $pdf->SetFont('Arial','',8);
 
         $tampung = array();
         $no = 1;
-        foreach ($pendapatan as $row)
+        foreach ($terlaris as $row)
         {
             $pdf->Cell(10,6,$no++.".",1,0,'C');
-            $pdf->Cell(20,6,$row->no_nota,1,0,'C');
-            $pdf->Cell(40,6,$row->nm_kategori,1,0,'C');
+            $pdf->Cell(20,6,$row->nm_kategori,1,0,'C');
             $pdf->Cell(40,6,$row->nm_menu,1,0,'C');
-            $pdf->Cell(20,6,number_format($row->harga,0,',','.'),1,0,'C');
+            $pdf->Cell(40,6,number_format($row->harga,0,',','.'),1,0,'C');
+            $pdf->Cell(20,6,$row->terlaris,1,0,'C');
             $pdf->Cell(15,6,$row->jumlah,1,0,'C');
             $pdf->Cell(45,6,number_format($row->harga_menu,0,',','.'),1,1,'C');
             $total[] = $row->harga_menu;

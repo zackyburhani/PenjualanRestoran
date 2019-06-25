@@ -27,7 +27,7 @@ class Laporan_Pendapatan extends CI_Controller
 
         if($akhir < $awal){
             $this->session->set_flashdata('pesanGagal','Tanggal Tidak Valid');
-            redirect('laporan_penjualan');
+            redirect('Laporan_Pendapatan');
         }
 
         $pdf = new FPDF('P','mm','A4');

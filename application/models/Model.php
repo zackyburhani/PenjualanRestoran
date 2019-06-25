@@ -224,18 +224,20 @@ class Model extends CI_Model {
 
 			if($limit == ""){
 				$query = $this->db->query("
-					SELECT nm_menu,COUNT(*) as terlaris FROM nota
+					SELECT *,COUNT(*) as terlaris FROM nota
 						JOIN detail_pesan ON nota.no_nota = detail_pesan.no_nota
 						JOIN menu ON menu.kd_menu = detail_pesan.kd_menu 
+						JOIN kategori ON menu.kd_kategori = kategori.kd_kategori 
 					WHERE nota.tgl_nota BETWEEN '$awal' AND '$akhir'
 					GROUP BY nm_menu
 					ORDER BY terlaris DESC
 				");
 			} else {
 				$query = $this->db->query("
-				SELECT nm_menu,COUNT(*) as terlaris FROM nota
+				SELECT *,COUNT(*) as terlaris FROM nota
 					JOIN detail_pesan ON nota.no_nota = detail_pesan.no_nota
 					JOIN menu ON menu.kd_menu = detail_pesan.kd_menu 
+					JOIN kategori ON menu.kd_kategori = kategori.kd_kategori
 				WHERE nota.tgl_nota BETWEEN '$awal' AND '$akhir'
 				GROUP BY nm_menu
 				ORDER BY terlaris DESC
