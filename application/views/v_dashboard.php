@@ -11,74 +11,43 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3><?php echo $pelanggan ?></h3>
-              <p>Data Pelanggan</p>
+              <h3><?php echo $kategori ?></h3>
+              <p>Data Kategori</p>
             </div>
             <div class="icon">
-              <i class="fa fa-users fa-fw"></i>
+              <i class="fa fa-tag fa-fw"></i>
             </div>
-            <a href="<?php echo site_url('pelanggan') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo site_url('Kategori') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <div class="col-md-4">
           <!-- small box -->
-          <div class="small-box bg-purple">
+          <div class="small-box bg-yellow">
             <div class="inner">
-              <h3><?php echo $barang ?></h3>
-              <p>Data Barang</p>
+              <h3><?php echo $menu ?></h3>
+              <p>Data Menu</p>
             </div>
             <div class="icon">
-              <i class="fa fa-cube"></i>
+              <i class="fa fa-tags"></i>
             </div>
-            <a href="<?php echo site_url('barang') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo site_url('Menu') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         
         <div class="col-md-4">
           <!-- small box -->
-          <div class="small-box bg-aqua">
+          <div class="small-box bg-blue">
             <div class="inner">
-              <h3><?php echo $copy ?></h3>
-              <p>Data Copy Barang</p>
+              <h3><?php echo $pelanggan ?></h3>
+              <p>Data Pelanggan</p>
             </div>
             <div class="icon">
-              <i class="fa fa-cubes"></i>
+              <i class="fa fa-users"></i>
             </div>
-            <a href="<?php echo site_url('barang/copy_barang') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo site_url('Pelanggan') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
-      </div>
-
-      <div class="row"> 
-        <!-- ./col -->
-        <div class="col-md-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3><?php echo $pesan ?></h3>
-              <p>Data Transaksi</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-money"></i>
-            </div>
-            <a href="<?php echo site_url('pesan') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <!-- small box -->
-          <div class="small-box bg-primary">
-            <div class="inner">
-              <h3><?php echo $retur ?></h3>
-              <p>Data Retur</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-retweet"></i>
-            </div>
-            <a href="<?php echo site_url('retur') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
       </div>
 
       <!-- /.row -->

@@ -47,8 +47,8 @@
               </a>
             </li>
             <li>
-              <a href="<?php echo site_url('laporan_retur') ?>">
-                <i class="fa fa-circle-o"></i> <span>Laporan Retur</span>
+              <a href="<?php echo site_url('Laporan_Pelanggan') ?>">
+                <i class="fa fa-circle-o"></i> <span>Laporan Pelanggan</span>
               </a>
             </li>
             <li>

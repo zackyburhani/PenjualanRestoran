@@ -228,13 +228,13 @@ class Nota extends CI_Controller
         $pdf->SetFont('Arial','B',16);
         //cetak gambar
         $image1 = "assets/img/LOGO.png";
-        $pdf->Cell(1, 0, $pdf->Image($image1, $pdf->GetX(), $pdf->GetY(), 35), 0, 0, 'L', false );
+        $pdf->Cell(1, 0, $pdf->Image($image1, $pdf->GetX(), $pdf->GetY(), 30), 0, 0, 'L', false );
         // mencetak string
-        $pdf->Cell(186,10,'SNAZZY ESSENTIALS',0,1,'C');
+        $pdf->Cell(186,10,'RESTAURANT BAKMI RIZKI',0,1,'C');
         $pdf->Cell(9,1,'',0,1);
         $pdf->SetFont('Arial','',9);
-        $pdf->Cell(186,7,'PERUMAHAN PURI PERMAI BLOK A2/03',0,1,'C');
-        $pdf->Cell(186,3,' Kec. Tigakarsa - Kab. Tangerang - Banten ',0,1,'C');
+        $pdf->Cell(186,7,'Jl. Raya Inpres No.55',0,1,'C');
+        $pdf->Cell(186,3,' Kec. Larangan, Kota Tangerang, Banten 15154 ',0,1,'C');
         $pdf->Cell(186,5,'',0,1,'C');
         $pdf->Cell(186,5,'',0,1,'C');
 
@@ -367,13 +367,13 @@ class Nota extends CI_Controller
         $pdf->SetFont('Arial','B',16);
         //cetak gambar
         $image1 = "assets/img/LOGO.png";
-        $pdf->Cell(1, 0, $pdf->Image($image1, $pdf->GetX(), $pdf->GetY(), 35), 0, 0, 'L', false );
+        $pdf->Cell(1, 0, $pdf->Image($image1, $pdf->GetX(), $pdf->GetY(), 30), 0, 0, 'L', false );
         // mencetak string
-        $pdf->Cell(186,10,'SNAZZY ESSENTIALS',0,1,'C');
+        $pdf->Cell(186,10,'RESTAURANT BAKMI RIZKI',0,1,'C');
         $pdf->Cell(9,1,'',0,1);
         $pdf->SetFont('Arial','',9);
-        $pdf->Cell(186,7,'PERUMAHAN PURI PERMAI BLOK A2/03',0,1,'C');
-        $pdf->Cell(186,3,' Kec. Tigakarsa - Kab. Tangerang - Banten ',0,1,'C');
+        $pdf->Cell(186,7,'Jl. Raya Inpres No.55',0,1,'C');
+        $pdf->Cell(186,3,' Kec. Larangan, Kota Tangerang, Banten 15154 ',0,1,'C');
         $pdf->Cell(186,5,'',0,1,'C');
         $pdf->Cell(186,5,'',0,1,'C');
 

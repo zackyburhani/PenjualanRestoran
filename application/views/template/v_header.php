@@ -58,7 +58,7 @@
   <!-- <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -80,11 +80,7 @@
       </a>
       
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li>
-            <label style="color: white; font-size: 16px; margin-top: 15px; margin-right: 15px;"><?php echo longdate_indo(date("Y-m-d")); ?></label>
-          </li>  
-        </ul>
+        
       </div>
     </nav>
   </header>

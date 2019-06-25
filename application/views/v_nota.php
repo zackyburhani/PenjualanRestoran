@@ -59,12 +59,10 @@
 												data-kd_pelanggan="<?php echo $nta->kd_pelanggan ?>"
 												data-kd_wo="<?php echo $nta->kd_wo ?>"><i
 													class="fa fa-folder-open"></i></button>
-											<button class="btn btn-primary btnCetakNota"
-												data-no_nota="<?php echo $nta->no_nota ?>"><i
-													class="fa fa-print"></i> Cetak Nota</button>
-											<button class="btn btn-success btnCetakWO"
-												data-kd_wo="<?php echo $nta->kd_wo ?>"><i
-													class="fa fa-print"></i> Cetak WO</button>
+											<a href="<?php echo site_url('Nota/cetak_nota/').$nta->no_nota?>" class="btn btn-primary"><i
+													class="fa fa-print"></i> Cetak Nota</a>
+											<a href="<?php echo site_url('Nota/cetak_wo/').$nta->kd_wo?>" class="btn btn-success"><i
+													class="fa fa-print"></i> Cetak WO</a>
 										</center>
 									</td>
 								</tr>
@@ -270,26 +268,6 @@
 					console.log(data);
 				}
 			});
-		} catch (e) {
-			console.log(e);
-		}
-	});
-
-	$("#dataNota").on("click", ".btnCetakNota", function () {
-		var no_nota = $(this).data("no_nota");
-
-		try {
-			window.location.href = "cetak_nota/"+no_nota;
-		} catch (e) {
-			console.log(e);
-		}
-	});
-
-	$("#dataNota").on("click", ".btnCetakWO", function () {
-		var no_nota = $(this).data("kd_wo");
-
-		try {
-			window.location.href = "cetak_wo/"+no_nota;
 		} catch (e) {
 			console.log(e);
 		}
