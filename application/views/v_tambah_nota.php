@@ -20,35 +20,36 @@
 								</option>
 								<?php } ?>
 							</select>
-                        </div>
-                        
-                        <div class="form-group">
+						</div>
+
+						<div class="form-group">
 							<label>Menu</label>
 							<select class="form-control select2" name="kd_menu" id="kode_menu">
 								<?php foreach($menu as $mn){ ?>
-								<option class="<?php echo $mn->kd_kategori ?>" value="<?php echo $mn->kd_menu?>"><?php echo $mn->nm_menu ?>
+								<option class="<?php echo $mn->kd_kategori ?>" value="<?php echo $mn->kd_menu?>">
+									<?php echo $mn->nm_menu ?>
 								</option>
 								<?php } ?>
 							</select>
-                        </div>
+						</div>
 
-                        <div class="form-group">
+						<div class="form-group">
 							<label for="exampleInputEmail1">Jumlah</label>
-							<input type="number" name="jumlah" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" min="1" placeholder="Jumlah" required class="form-control">
-                        </div>
+							<input type="number" name="jumlah"
+								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+								min="1" placeholder="Jumlah" required class="form-control">
+						</div>
 
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Keterangan</label>
-                            <textarea class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
-                        </div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Keterangan</label>
+							<textarea class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
+						</div>
 
-                        <div class="form-group">
-                            <button class="btn pull-right btn-primary btn-md add_cart" type="button"><span
-															class="fa fa-plus"></span> TambaData</button>
-                        </div>
+						<div class="form-group">
+							<button class="btn pull-right btn-primary btn-md add_cart" type="button"><span
+									class="fa fa-plus"></span> TambaData</button>
+						</div>
 
-                        
-                        
 					</div>
 					<!-- /.box-body -->
 				</div>
@@ -57,51 +58,56 @@
 			<!-- /.col -->
 		</div>
 
-
-
-
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<br>
 					<div class="panel-body">
 
-						<table style="table-layout:fixed" class="table table-striped table-bordered table-hover">
-							<thead>
-								<tr>
-									<th align="center" width="50px">No. </th>
-									<th align="center">
-										<center>Kategori</center>
-									</th>
-									<th align="center">
-										<center>Menu</center>
-									</th>
-									<th align="center">
-										<center>Keterangan</center>
-									</th>
-									<th align="center">
-										<center>Harga</center>
-									</th>
-									<th align="center" width="100px">
-										<center>Jumlah</center>
-									</th>
-									<th align="center" width="150px">
-										<center>Jumlah Harga</center>
-									</th>
-									<th align="center" width="80px">
-										<center>Hapus</center>
-									</th>
-								</tr>
-							</thead>
-							<tbody id="detail_cart">
+						<div class="row">
+							<div class="col-lg-12">
+								<table style="table-layout:fixed"
+									class="table table-striped table-bordered table-hover">
+									<thead>
+										<tr>
+											<th align="center" width="50px">No. </th>
+											<th align="center">
+												<center>Kategori</center>
+											</th>
+											<th align="center">
+												<center>Menu</center>
+											</th>
+											<th align="center">
+												<center>Keterangan</center>
+											</th>
+											<th align="center">
+												<center>Harga</center>
+											</th>
+											<th align="center" width="100px">
+												<center>Jumlah</center>
+											</th>
+											<th align="center" width="150px">
+												<center>Jumlah Harga</center>
+											</th>
+											<th align="center" width="80px">
+												<center>Hapus</center>
+											</th>
+										</tr>
+									</thead>
+									<tbody id="detail_cart">
 
-							</tbody>
-						</table>
+									</tbody>
+								</table>
+							</div>
+						</div>
 
-						<div class="col-md-6">
-							<button type="button" id="btn_proses" data-target="#ModalTambahPesan" data-toggle="modal"
-								class="btn btn-success btn-md btn-block"><span class="fa fa-sign-out"></span>
-								Proses</button>
+						<div class="row">
+							<div class="col-lg-4 pull-right">
+								<button type="button" id="btn_proses" data-target="#ModalTambahPesan"
+									data-toggle="modal" class="btn btn-success btn-md btn-block"><span
+										class="fa fa-sign-out"></span>
+									Proses</button>
+							</div>
 						</div>
 
 					</div>
@@ -113,7 +119,7 @@
 </div>
 
 <!-- MODAL ADD -->
-<div class="modal fade" id="ModalTambahPesan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="modalTambahNota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -128,44 +134,29 @@
 						<div class="col-md-6">
 							<div class="form-group"><label>Nomor Nota</label>
 								<input required class="form-control required text-capitalize" data-placement="top"
-									data-trigger="manual" type="text" name="nomor_nota" readonly>
-								<input required class="form-control required text-capitalize" data-placement="top"
-									data-trigger="manual" type="hidden" name="id_pesan" readonly>
+									data-trigger="manual" type="text" value="<?php echo $no_nota ?>"
+									name="no_nota_simpan" readonly>
 							</div>
 						</div>
 						<div class="col-md-6">
-							<div class="form-group"><label>Diskon</label>
+							<div class="form-group"><label>ID Pelanggan</label>
 								<input required class="form-control required text-capitalize" data-placement="top"
-									data-trigger="manual" type="hidden" name="diskon">
+									data-trigger="manual" type="text" value="<?php echo $kd_pelanggan ?>"
+									name="kd_pelanggan_simpan" readonly>
 							</div>
 						</div>
 					</div>
 
 					<hr>
-					<div class="form-group"><label>Cari Data Pelanggan</label>
-						<div class="input-group">
-							<input type="text"
-								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-								class="form-control" placeholder="Cari Nomor Telepon" name="cari_pelanggan">
-							<span class="input-group-btn">
-								<button type="button" onclick="cari()" class="btn btn-info btn-flat"><i
-										class="fa fa-search"></i> Cari</button>
-							</span>
-						</div>
-
-					</div>
-					<hr>
-
-					<input type="hidden" name="id_plg">
 
 					<div class="form-group"><label>Nama Pelanggan</label>
-						<input required class="form-control required text-capitalize" placeholder="Input Nama Pelanggan"
-							data-placement="top" data-trigger="manual" type="text" name="nm_plg">
+						<input required class="form-control required" placeholder="Input Nama Pelanggan"
+							data-placement="top" data-trigger="manual" type="text" name="nm_pelanggan_simpan">
 					</div>
 
 					<div class="form-group">
 						<label class="control-label">Nomor Telepon</label>
-						<input name="no_telp"
+						<input name="no_telp_simpan"
 							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 							class="form-control" type="text" placeholder="Input Nomor Telepon" required>
 					</div>
@@ -173,7 +164,7 @@
 					<div class="form-group">
 						<label class="control-label">Alamat</label>
 						<textarea placeholder="Input Alamat..." rows="4" cols="5" class="form-control"
-							name="alamat"></textarea>
+							name="alamat_simpan"></textarea>
 					</div>
 
 				</div>
@@ -188,61 +179,12 @@
 </div>
 <!--END MODAL ADD-->
 
-<!-- MODAL DETAIL -->
-<div class="modal fade" id="ModalPesanDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel"><i class="fa fa-tag"></i> Detail Pesan</h4>
-			</div>
-			<div class="modal-body">
-				<div class="row" id="detail_order1">
-
-				</div>
-				<table style="table-layout:fixed" class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th align="center" width="50px">No. </th>
-							<th align="center">
-								<center>ID Barang</center>
-							</th>
-							<th align="center">
-								<center>Nama Barang</center>
-							</th>
-							<th align="center">
-								<center>Harga</center>
-							</th>
-							<th align="center">
-								<center>QTY</center>
-							</th>
-							<th align="center">
-								<center>Jumlah Harga</center>
-							</th>
-						</tr>
-					</thead>
-					<tbody id="detail_order2">
-
-					</tbody>
-				</table>
-
-			</div>
-			<div class="modal-footer">
-				<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="fa fa-close"></i> Tutup</button>
-			</div>
-			</form>
-		</div>
-	</div>
-</div>
-<!-- END MODAL DETAIL -->
-
 <script type="text/javascript">
 	$(document).ready(function () {
 
-        $("#kode_menu").chained("#kode_kategori"); 
+		$("#kode_menu").chained("#kode_kategori");
 
-		$('[name="qty"]').keypress(function (event) {
+		$('[name="jumlah"]').keypress(function (event) {
 			if (event.keyCode === 10 || event.keyCode === 13) {
 				event.preventDefault();
 			}
@@ -286,9 +228,9 @@
 					keterangan: keterangan
 				},
 				success: function (data) {
-                    $('#kode_kategori').val("");
-                    $('[name="jumlah"]').val("");
+					$('[name="jumlah"]').val("");
 					$('[name="keterangan"]').val("");
+					$("#btn_proses").show();
 					$('#detail_cart').html(data);
 				}
 			});
@@ -317,7 +259,7 @@
 
 			//untuk validasi tombol simpan
 			$.ajax({
-				url: "<?php echo base_url('ControllerPesan/cekCart')?>",
+				url: "<?php echo base_url('Nota/cekCart')?>",
 				dataType: "JSON",
 				success: function (data) {
 					if (data == false) {
@@ -329,138 +271,94 @@
 						});
 						return false;
 					} else {
-
-						$.ajax({
-							type: "GET",
-							url: "<?php echo base_url('pesan/getKode')?>",
-							dataType: "JSON",
-							success: function (data) {
-								$.each(data, function (id_pesan) {
-									$('#ModalTambahPesan').modal('show');
-									$('[name="id_pesan"]').val(data
-										.id_pesan);
-									$('[name="nomor_nota"]').val(data
-										.no_nota);
-								});
-							}
-						});
-
-						$.ajax({
-							type: "GET",
-							url: "<?php echo base_url('ControllerPesan/getKodePelanggan')?>",
-							dataType: "JSON",
-							success: function (data_plg) {
-								console.log(data_plg);
-								$('#ModalTambahPesan').modal('show');
-								$('[name="id_plg"]').val(data_plg);
-							}
-						});
-
-
+						$("#modalTambahNota").modal("show");
 					}
 				}
 			});
-
 			return false;
 		});
 
 		//Simpan pesan
 		$('#btn_simpan').on('click', function () {
-			var id_pesan = $('[name="id_pesan"]').val();
+			var no_nota = $('[name="no_nota_simpan"]').val();
+			var kd_pelanggan = $('[name="kd_pelanggan_simpan"]').val();
+			var nm_pelanggan = $('[name="nm_pelanggan_simpan"]').val();
+			var no_telp = $('[name="no_telp_simpan"]').val();
+			var alamat = $('[name="alamat_simpan"]').val();
 
-			if ($('[name="diskon"]').is(':checked')) {
-				var diskon = "1";
-			} else {
-				var diskon = "";
-			}
-
-			var no_telp = $('[name="no_telp"]').val();
 			//cek nomor yang sama
 			$.ajax({
-				type: "get",
-				url: "<?php echo base_url('pesan/get_pelanggan')?>",
+				type: "POST",
+				url: "<?php echo base_url('Nota/simpan')?>",
 				dataType: "JSON",
 				data: {
-					no_telp: no_telp
+					no_nota: no_nota,
+					kd_pelanggan: kd_pelanggan,
+					nm_pelanggan: nm_pelanggan,
+					no_telp: no_telp,
+					alamat: alamat
 				},
 				success: function (data) {
-
-					var nm_plg = $('[name="nm_plg"]').val();
-					var no_telp = $('[name="no_telp"]').val();
-					var alamat = $('[name="alamat"]').val();
-					if (data != null) {
-						var id_plg = data.id_plg;
-					} else {
-						var id_plg = $('[name="id_plg"]').val();
-					}
-
 					$.ajax({
-						type: "POST",
-						url: "<?php echo base_url('pesan/simpan')?>",
+						type: "GET",
+						url: "<?php echo base_url('Nota/load_detail')?>",
 						dataType: "JSON",
-						data: {
-							id_pesan: id_pesan,
-							id_plg: id_plg,
-							diskon: diskon,
-							nm_plg: nm_plg,
-							no_telp: no_telp,
-							alamat: alamat
-						},
 						success: function (data) {
-							$('[name="id_pesan"]').val();
-							$('[name="diskon"]').val();
-							$('[name="nm_plg"]').val();
-							$('[name="no_telp"]').val();
-							$('[name="alamat"]').val();
-							$('#ModalTambahPesan').modal('hide');
 
-							$.ajax({
-								type: "GET",
-								url: "<?php echo base_url('ControllerPesan/load_detail')?>",
-								dataType: "JSON",
-								success: function (data) {
+							$.each(data, function (index, objek) {
+								var kd_menu = objek.kd_menu;
+								var jumlah = objek.jumlah;
+								var harga_menu = objek.harga_menu;
+								var keterangan = objek.keterangan;
 
-									$.each(data, function (index,
-										objek) {
-										var id = objek.id;
-										var qty = objek.qty;
-										var price = objek
-											.price;
-
-										$.ajax({
-											type: "POST",
-											url: "<?php echo base_url('pesan/simpan_detail')?>",
-											dataType: "JSON",
-											data: {
-												id_brg: id,
-												id_pesan: id_pesan,
-												qty: qty,
-												jml_bayar: price
-											},
-
-										});
-									});
-								}
-							});
-							$('[name="cari_pelanggan"]').val("");
-							$('[name="diskon"]').val("");
-							$('[name="nm_plg"]').val("");
-							$('[name="no_telp"]').val("");
-							$('[name="alamat"]').val("");
-							swal({
-								title: "Berhasil Disimpan",
-								text: "",
-								icon: "success",
-								button: "Ok !",
-							}).then(function () {
-								$('#detail_cart').load(
-									'<?php echo base_url('') ?>');
-								window.location.href =
-									"<?php echo base_url('order')?>";
+								$.ajax({
+									type: "POST",
+									url: "<?php echo base_url('Nota/simpan_detail')?>",
+									dataType: "JSON",
+									data: {
+										kd_menu : kd_menu,
+										no_nota : no_nota,
+										jumlah : jumlah,
+										harga_menu: harga_menu,
+										keterangan : keterangan,
+									},
+								});
 							});
 						}
 					});
 
+					if (data == "sukses") {
+						$('#modalTambahNota').modal('hide');
+						$('[name="nm_pelanggan_simpan"]').val("");
+						$('[name="no_telp_simpan"]').val("");
+						$('[name="alamat_simpan"]').val("");
+						swal({
+							icon: "success",
+							title: "Berhasil",
+							text: "Data Berhasil disimpan",
+							timer: 3000
+						}).then(function () {
+							$('#detail_cart').load('<?php echo base_url('Nota/destroy') ?>');
+							window.location.href = "<?php echo base_url('Nota')?>";
+						});
+					} else if (data == "gagal") {
+						swal({
+							icon: "info",
+							title: "Required",
+							text: data.errors,
+							timer: 3000
+						});
+					} else {
+						swal({
+							icon: "error",
+							title: "Error",
+							text: "Data Gagal Disimpan",
+							timer: 3000
+						})
+					}
+				},
+				error: function (data) {
+					console.log(data);
 				}
 			});
 			return false;

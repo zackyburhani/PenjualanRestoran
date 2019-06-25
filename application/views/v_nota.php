@@ -11,8 +11,8 @@
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<button class="btn btn-info" onclick="tambahPesan()"><i
-								class="fa fa-plus"></i> Tambah Pesanan</button>
+						<button class="btn btn-info" onclick="tambahPesan()"><i class="fa fa-plus"></i> Tambah
+							Pesanan</button>
 					</div>
 					<div class="panel-body">
 
@@ -27,10 +27,10 @@
 									<th width="150px">
 										<center>Tanggal Nota</center>
 									</th>
-                                    <th width="150px">
+									<th width="150px">
 										<center>ID WO</center>
 									</th>
-									<th width="100px">
+									<th>
 										<center>Action</center>
 									</th>
 								</tr>
@@ -49,16 +49,22 @@
 										<center><?php echo $nta->tgl_nota ?></center>
 									</td>
 									<td>
+										<center><?php echo $nta->kd_wo ?></center>
+									</td>
+									<td>
 										<center>
-											<button class="btn btn-info btnDetailMenu"
+											<button class="btn btn-info btnDetailNota"
 												data-no_nota="<?php echo $nta->no_nota ?>"
 												data-tgl_nota="<?php echo $nta->tgl_nota ?>"
 												data-kd_pelanggan="<?php echo $nta->kd_pelanggan ?>"
 												data-kd_wo="<?php echo $nta->kd_wo ?>"><i
 													class="fa fa-folder-open"></i></button>
-											<button class="btn btn-danger btnHapusMenu"
-												data-kd_menu="<?php echo $nta->no_nota ?>"><i
-													class="fa fa-trash"></i></button>
+											<button class="btn btn-primary btnCetakNota"
+												data-no_nota="<?php echo $nta->no_nota ?>"><i
+													class="fa fa-print"></i> Cetak Nota</button>
+											<button class="btn btn-success btnCetakWO"
+												data-kd_wo="<?php echo $nta->kd_wo ?>"><i
+													class="fa fa-print"></i> Cetak WO</button>
 										</center>
 									</td>
 								</tr>
@@ -82,7 +88,7 @@
 				<h4 class="modal-title" id="myModalLabel"><i class="fa fa-tag"></i> Detail Pesan</h4>
 			</div>
 			<div class="modal-body">
-				<div class="row" id="detail_order1">
+				<div class="row" id="detail_pesan1">
 
 				</div>
 				<table style="table-layout:fixed" class="table table-striped table-bordered table-hover">
@@ -96,6 +102,9 @@
 								<center>Nama Barang</center>
 							</th>
 							<th align="center">
+								<center>keterangan</center>
+							</th>
+							<th align="center">
 								<center>Harga</center>
 							</th>
 							<th align="center">
@@ -106,14 +115,14 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody id="detail_order2">
+					<tbody id="detail_pesan2">
 
 					</tbody>
 				</table>
 
 			</div>
 			<div class="modal-footer">
-				<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="fa fa-close"></i> Tutup</button>
+				<button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><i class="fa fa-close"></i> Tutup</button>
 			</div>
 			</form>
 		</div>
@@ -126,7 +135,167 @@
 		$('#dataNota').dataTable();
 	});
 
-    function tambahPesan(){
-        window.location.href = "Nota/tambah_pesan";
-    }
+	function tambahPesan() {
+		window.location.href = "tambah_pesan";
+	}
+
+	function sum(total, num) {
+		return total+num;
+	}
+
+	//Untuk menampilkan data detail
+	$("#dataNota").on("click", ".btnDetailNota", function () {
+		var no_nota = $(this).data("no_nota");
+		var kd_wo = $(this).data("kd_wo");
+		var kd_pelanggan = $(this).data("kd_pelanggan");
+		var tgl_nota = $(this).data("tgl_nota");
+
+		try {
+
+			$.ajax({
+				type: "POST",
+				url: "<?php echo base_url('Nota/getDetailNota')?>",
+				dataType: "JSON",
+				data: {
+					no_nota: no_nota
+				},
+				success: function (data) {
+					console.log(data);
+
+					var html = '';
+					var i;
+					no = 1;
+
+					var nm_pelanggan = data[0].nm_pelanggan;
+					var alamat = data[0].alamat;
+					var no_telp = data[0].no_telp;
+
+					if (nm_pelanggan == null || nm_pelanggan == "") {
+						nm_pelanggan = '-';
+					}
+
+					if (alamat == null || alamat == "") {
+						alamat = '-';
+					}
+
+					if (no_telp == null || no_telp == "") {
+						no_telp = '-';
+					}
+
+					html +=
+						'<div class="col-md-6">' +
+							'<table style="table-layout:fixed" class="table table-bordered ">' +
+								'<tbody>' +
+									'<tr>' +
+										'<td style="width: 100px">Nama</td>' +
+										'<td style="width: 10px">:</td>' +
+										'<td>' + nm_pelanggan + '</td>' +
+									'</tr>' +
+									'<tr>' +
+										'<td>Telepon</td>' +
+										'<td>:</td>' +
+										'<td>' + no_telp + '</td>' +
+									'</tr>' +
+									'<tr>' +
+										'<td>Alamat</td>' +
+										'<td>:</td>' +
+										'<td>' + alamat + '</td>' +
+									'</tr>' +
+								'</tbody>' +
+							'</table>' +
+						'</div>' +
+						'<div class="col-md-6">' +
+							'<table style="table-layout:fixed" class="table table-bordered ">' +
+								'<tbody>' +
+									'<tr>' +
+										'<td style="width: 150px">Nomor Nota</td>' +
+										'<td style="width: 10px">:</td>' +
+										'<td><b>' + data[0].no_nota + '</b></td>' +
+									'</tr>' +
+									'<tr>' +
+										'<td style="width: 150px">Tanggal Bayar</td>' +
+										'<td style="width: 10px">:</td>' +
+										'<td>' + data[0].tgl_nota + '</td>' +
+									'</tr>' +
+									'<tr>' +
+										'<td style="width: 150px">ID WO</td>' +
+										'<td style="width: 10px">:</td>' +
+										'<td><b>' + data[0].kd_wo + '</b></td>' +
+									'</tr>' +
+								'</tbody>' +
+							'</table>' +
+						'</div>';
+
+					$('#detail_pesan1').html(html);
+
+					var html = '';
+					var total = [];
+					var i;
+					no = 1;
+					for(i=0; i<data.length; i++){
+
+						if(data[i].keterangan == ""){
+							var keterangan = "-";
+						} else {
+							var keterangan = data[i].keterangan;
+						}
+						
+						html += 
+							'<tr>'+
+								'<td><center>'+no+++'</center></td>'+
+								'<td><center>'+data[i].kd_menu+'</center></td>'+
+								'<td><center>'+data[i].nm_menu+'</center></td>'+
+								'<td><center>'+keterangan+'</center></td>'+
+								'<td><center>'+data[i].harga+'</center></td>'+
+								'<td><center>'+data[i].jumlah+'</center></td>'+
+								'<td><center>'+data[i].harga_menu+'</center></td>'+
+							'</tr>';
+
+							total.push(parseInt(data[i].sum));
+						}
+						
+						
+						var print = total.reduce(sum);
+
+						var har = print;
+                        var reverse = har.toString().split('').reverse().join(''),
+                        ribuan  = reverse.match(/\d{1,3}/g);
+                        ribuan  = ribuan.join('.').split('').reverse().join('');
+
+						html +=
+						'<tr>'+
+							'<td colspan="6"><center><b>TOTAL</b></center></td>'+
+							'<td><center><b>'+ribuan+'</b></center></td>'+
+						'</tr>';
+						$('#detail_pesan2').html(html);
+						$("#ModalNotaDetail").modal("show");
+				},
+				error: function (data) {
+					console.log(data);
+				}
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	});
+
+	$("#dataNota").on("click", ".btnCetakNota", function () {
+		var no_nota = $(this).data("no_nota");
+
+		try {
+			window.location.href = "cetak_nota/"+no_nota;
+		} catch (e) {
+			console.log(e);
+		}
+	});
+
+	$("#dataNota").on("click", ".btnCetakWO", function () {
+		var no_nota = $(this).data("kd_wo");
+
+		try {
+			window.location.href = "cetak_wo/"+no_nota;
+		} catch (e) {
+			console.log(e);
+		}
+	});
 </script>

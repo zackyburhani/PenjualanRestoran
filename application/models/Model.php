@@ -109,6 +109,36 @@ class Model extends CI_Model {
          $kd = "0000001";
     	}
        	return "NTA".$kd;
+	}
+	
+	public function getKodePelanggan()
+    {
+       	$q  = $this->db->query("SELECT MAX(RIGHT(kd_pelanggan,7)) as kd_max from pelanggan");
+       	$kd = "";
+    	if($q->num_rows() > 0) {
+        	foreach ($q->result() as $k) {
+          		$tmp = ((int)$k->kd_max)+1;
+           		$kd = sprintf("%07s",$tmp);
+        	}
+    	} else {
+         $kd = "0000001";
+    	}
+       	return "PLG".$kd;
+	}
+	
+	public function getKodeWO()
+    {
+       	$q  = $this->db->query("SELECT MAX(RIGHT(kd_wo,8)) as kd_max from wo");
+       	$kd = "";
+    	if($q->num_rows() > 0) {
+        	foreach ($q->result() as $k) {
+          		$tmp = ((int)$k->kd_max)+1;
+           		$kd = sprintf("%08s",$tmp);
+        	}
+    	} else {
+         $kd = "00000001";
+    	}
+       	return "WO".$kd;
     }
 
 	public function get_kategori()
@@ -118,11 +148,58 @@ class Model extends CI_Model {
     }
 		
 	public function get_menu()
-   {
+   	{
         $this->db->order_by('nm_menu', 'asc');
         $this->db->join('menu', 'menu.kd_kategori = kategori.kd_kategori');
         return $this->db->get('kategori')->result();
-    }
+	}
+	
+	public function getNotaWO()
+	{
+		$this->db->order_by('nota.no_nota', 'desc');
+        $this->db->join('nota', 'nota.no_nota = wo.no_nota');
+        return $this->db->get('wo')->result();
+	}
+
+	public function getDetailNota($no_nota)
+	{
+		$this->db->order_by('nota.no_nota', 'desc');
+		$this->db->join('nota', 'nota.no_nota = wo.no_nota');
+		$this->db->join('pelanggan', 'nota.kd_pelanggan = pelanggan.kd_pelanggan');
+		$this->db->join('detail_pesan', 'detail_pesan.no_nota = nota.no_nota');
+		$this->db->join('menu', 'menu.kd_menu = detail_pesan.kd_menu');
+		$this->db->join('kategori', 'kategori.kd_kategori = menu.kd_kategori');
+		$this->db->where('nota.no_nota',$no_nota);
+        return $this->db->get('wo')->result();
+	}
+
+	public function getDetailNota_fetch($no_nota)
+	{
+		$this->db->order_by('nota.no_nota', 'desc');
+		$this->db->join('nota', 'nota.no_nota = wo.no_nota');
+		$this->db->join('pelanggan', 'nota.kd_pelanggan = pelanggan.kd_pelanggan');
+		$this->db->join('detail_pesan', 'detail_pesan.no_nota = nota.no_nota');
+		$this->db->join('menu', 'menu.kd_menu = detail_pesan.kd_menu');
+		$this->db->join('kategori', 'kategori.kd_kategori = menu.kd_kategori');
+		$this->db->where('nota.no_nota',$no_nota);
+        return $this->db->get('wo')->row();
+	}
+
+	public function getDetailWO($kd_wo)
+	{
+		$this->db->order_by('nota.no_nota', 'desc');
+		$this->db->join('nota', 'nota.no_nota = wo.no_nota');
+		$this->db->join('pelanggan', 'nota.kd_pelanggan = pelanggan.kd_pelanggan');
+		$this->db->join('detail_pesan', 'detail_pesan.no_nota = nota.no_nota');
+		$this->db->join('menu', 'menu.kd_menu = detail_pesan.kd_menu');
+		$this->db->join('kategori', 'kategori.kd_kategori = menu.kd_kategori');
+		$this->db->where('wo.kd_wo',$kd_wo);
+        return $this->db->get('wo')->result();
+	}
+
+	////
+
+
 
 	//count
 	public function jumlah($table)
