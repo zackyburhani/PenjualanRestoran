@@ -42,8 +42,8 @@
           </a>
           <ul class="treeview-menu">
             <li>
-              <a href="<?php echo site_url('laporan_penjualan') ?>">
-                <i class="fa fa-circle-o"></i> <span>Laporan Penjualan</span>
+              <a href="<?php echo site_url('Laporan_Pendapatan') ?>">
+                <i class="fa fa-circle-o"></i> <span>Laporan Pendapatan</span>
               </a>
             </li>
             <li>
@@ -52,8 +52,8 @@
               </a>
             </li>
             <li>
-              <a href="<?php echo site_url('laporan_pesan') ?>">
-                <i class="fa fa-circle-o"></i> <span>Laporan Pesan</span>
+              <a href="<?php echo site_url('Laporan_Terlaris') ?>">
+                <i class="fa fa-circle-o"></i> <span>Laporan Menu Terlaris</span>
               </a>
             </li>
           </ul>

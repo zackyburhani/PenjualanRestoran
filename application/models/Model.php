@@ -197,6 +197,59 @@ class Model extends CI_Model {
         return $this->db->get('wo')->result();
 	}
 
+	public function lapPendapatan($awal,$akhir)
+	{
+		$check = false;
+		try{
+			$query = $this->db->query("
+				SELECT * FROM pelanggan
+					JOIN nota ON nota.kd_pelanggan = pelanggan.kd_pelanggan
+					JOIN detail_pesan ON detail_pesan.no_nota = nota.no_nota
+					JOIN menu ON menu.kd_menu = detail_pesan.kd_menu
+					JOIN kategori ON kategori.kd_kategori = menu.kd_kategori
+					JOIN wo ON wo.no_nota = nota.no_nota
+				WHERE nota.tgl_nota BETWEEN '$awal' AND '$akhir'
+			");
+			return $query->result();
+		}catch (Exception $ex) {
+			$check = false;
+		}
+		return $check;
+	}
+
+	public function lapTerlaris($awal,$akhir,$limit)
+	{
+		$check = false;
+		try{
+
+			if($limit == ""){
+				$query = $this->db->query("
+					SELECT nm_menu,COUNT(*) as terlaris FROM nota
+						JOIN detail_pesan ON nota.no_nota = detail_pesan.no_nota
+						JOIN menu ON menu.kd_menu = detail_pesan.kd_menu 
+					WHERE nota.tgl_nota BETWEEN '$awal' AND '$akhir'
+					GROUP BY nm_menu
+					ORDER BY terlaris DESC
+				");
+			} else {
+				$query = $this->db->query("
+				SELECT nm_menu,COUNT(*) as terlaris FROM nota
+					JOIN detail_pesan ON nota.no_nota = detail_pesan.no_nota
+					JOIN menu ON menu.kd_menu = detail_pesan.kd_menu 
+				WHERE nota.tgl_nota BETWEEN '$awal' AND '$akhir'
+				GROUP BY nm_menu
+				ORDER BY terlaris DESC
+				limit $limit
+			");
+			}
+			return $query->result();
+		}catch (Exception $ex) {
+			$check = false;
+		}
+		return $check;
+	}
+
+
 	////
 
 

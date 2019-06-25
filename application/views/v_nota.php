@@ -11,8 +11,8 @@
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<button class="btn btn-info" onclick="tambahPesan()"><i class="fa fa-plus"></i> Tambah
-							Pesanan</button>
+						<a href="<?php echo site_url('Nota/tambah_pesan'); ?>" class="btn btn-info" ><i class="fa fa-plus"></i> Tambah
+							Pesanan</a>
 					</div>
 					<div class="panel-body">
 
@@ -134,10 +134,6 @@
 	$(document).ready(function () {
 		$('#dataNota').dataTable();
 	});
-
-	function tambahPesan() {
-		window.location.href = "tambah_pesan";
-	}
 
 	function sum(total, num) {
 		return total+num;
